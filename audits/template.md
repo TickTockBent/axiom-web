@@ -1,6 +1,6 @@
-# AXO Audit Report: [SITE URL]
+# AXIOM Audit Report: [SITE URL]
 
-**Framework:** AXO (Agent eXecution Optimization) v3.0
+**Framework:** AXIOM Scoring Framework v3.1
 **Date:** [YYYY-MM-DD]
 **Auditor:** [Name / Organization]
 **Pages Audited:** [List of pages, e.g. /, /products, /about, /contact]
@@ -11,15 +11,15 @@
 
 | | |
 |---|---|
-| **AXO Score** | **[XX] / 100** |
+| **AXIOM Score** | **[XX] / 100** |
 | **Grade** | **[A/B/C/D/F] — [Agent-Ready / Agent-Functional / Agent-Impaired / Agent-Hostile / Agent-Invisible]** |
 | **Findings** | [X] Critical, [X] High, [X] Medium, [X] Low, [X] Info |
 
 ```
-AXO = (CS × 0.25) + (SL × 0.20) + (IMC × 0.20) + (DE × 0.15) + (NT × 0.10) + (ARF × 0.10)
-    = ([CS] × 0.25) + ([SL] × 0.20) + ([IMC] × 0.20) + ([DE] × 0.15) + ([NT] × 0.10) + ([ARF] × 0.10)
-    = [X] + [X] + [X] + [X] + [X] + [X]
-    = [TOTAL]
+AXIOM = (CS × 0.25) + (SL × 0.20) + (IMC × 0.20) + (DE × 0.15) + (NT × 0.10) + (ARF × 0.10)
+      = ([CS] × 0.25) + ([SL] × 0.20) + ([IMC] × 0.20) + ([DE] × 0.15) + ([NT] × 0.10) + ([ARF] × 0.10)
+      = [X] + [X] + [X] + [X] + [X] + [X]
+      = [TOTAL]
 ```
 
 ### Scorecard
@@ -65,7 +65,7 @@ Pass: >=70 | Warn: 40-69 | Fail: <40
 
 ### Score Justification
 
-[Explain how the score was determined based on the scoring bands in AXO Framework Section 3.1]
+[Explain how the score was determined based on the scoring bands in AXIOM Scoring Framework Section 3.1]
 
 ---
 
@@ -111,7 +111,7 @@ h1: [heading text]
 
 ### Score Justification
 
-[Explain how the score was determined based on the scoring bands in AXO Framework Section 3.2]
+[Explain how the score was determined based on the scoring bands in AXIOM Scoring Framework Section 3.2]
 
 ---
 
@@ -145,7 +145,7 @@ h1: [heading text]
 
 ### Score Justification
 
-[Explain how the score was determined based on the scoring bands in AXO Framework Section 3.3]
+[Explain how the score was determined based on the scoring bands in AXIOM Scoring Framework Section 3.3]
 
 ---
 
@@ -179,7 +179,7 @@ h1: [heading text]
 
 ### Score Justification
 
-[Explain how the score was determined based on the scoring bands in AXO Framework Section 3.4]
+[Explain how the score was determined based on the scoring bands in AXIOM Scoring Framework Section 3.4]
 
 ---
 
@@ -230,7 +230,7 @@ h1: [heading text]
 
 ### Score Justification
 
-[Explain how the score was determined based on the scoring bands in AXO Framework Section 3.5]
+[Explain how the score was determined based on the scoring bands in AXIOM Scoring Framework Section 3.5]
 
 ---
 
@@ -263,7 +263,7 @@ h1: [heading text]
 
 ### Score Justification
 
-[Explain how the score was determined based on the scoring bands in AXO Framework Section 3.6]
+[Explain how the score was determined based on the scoring bands in AXIOM Scoring Framework Section 3.6]
 
 ---
 
@@ -283,11 +283,11 @@ h1: [heading text]
 
 | | |
 |---|---|
-| **Framework** | AXO v3.0 |
+| **Framework** | AXIOM Scoring Framework v3.1 |
 | **Tools** | [List tools used, e.g. Charlotte MCP, curl, browser DevTools] |
 | **Pages** | [List of pages audited] |
 | **Environment** | [Production / Staging / Local] |
 
 ---
 
-*This report was generated using the AXO Framework v3.0 scoring methodology.*
+*This report was generated using the AXIOM Scoring Framework v3.1 methodology.*

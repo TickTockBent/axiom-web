@@ -1,6 +1,6 @@
-# AXIOM & AXO
+# AXIOM
 
-**Agent eXecution, Information & Orchestration Markup** and **Agent eXecution Optimization** — Open standards for the agentic web.
+**Agent eXecution, Information & Orchestration Markup** — An open standard for the agentic web.
 
 ---
 
@@ -15,15 +15,13 @@ AI agents are browsing the web on behalf of users right now. When they visit you
 
 Meanwhile, `robots.txt` — a binary instrument from 1994 — forces site owners to choose between blocking all AI traffic (including agents sending you customers) or allowing all of it (including crawlers harvesting your content for training data).
 
-## The Solution
+## What Is AXIOM?
 
-This repository contains two complementary specifications:
+AXIOM is a complete framework for making websites work in the agentic web. It has two parts:
 
-### AXO Framework
+### AXIOM Scoring Framework
 
-**Agent eXecution Optimization** — A scoring and measurement framework that quantifies how effectively AI agents can discover, navigate, understand, and operate a website.
-
-AXO measures agent-readiness across six dimensions:
+A measurement and diagnostic framework that quantifies how effectively AI agents can discover, navigate, understand, and operate a website. It scores agent-readiness across six dimensions:
 
 | Dimension | Weight | What It Measures |
 |---|---|---|
@@ -34,26 +32,24 @@ AXO measures agent-readiness across six dimensions:
 | Navigation Traversability | 10% | Can agents explore the site via static links? |
 | Agent Response Fitness | 10% | Does the content tell a coherent story as plain text? |
 
-AXO answers: **"How agent-ready is this site?"**
+The Scoring Framework answers: **"How agent-ready is this site?"**
 
-### AXIOM Specification
+### AXIOM Build Spec
 
-**Agent eXecution, Information & Orchestration Markup** — An implementation standard for building websites that AI agents can effectively discover, navigate, understand, and operate.
-
-AXIOM provides:
+An implementation standard for building websites that AI agents can effectively discover, navigate, understand, and operate. It provides:
 
 - **Traffic Governance** — A three-tier model that separates crawlers from agents, giving site owners granular control over automated access.
 - **An agent manifest** — `axiom.json`, a machine-readable declaration of a site's agent-facing capabilities and access policy.
 - **A markup vocabulary** — `data-axiom-*` attributes that communicate intent, structure, and interaction contracts to agents beyond what HTML and ARIA alone provide.
 - **Readiness levels** — A tiered adoption path from quick wins (deploy one JSON file) to full agent optimization.
 
-AXIOM answers: **"How do I build an agent-ready site?"**
+The Build Spec answers: **"How do I build an agent-ready site?"**
 
 ### How They Work Together
 
-AXO identifies the gap. AXIOM closes it.
+The Scoring Framework identifies the gap. The Build Spec closes it.
 
-| | AXO | AXIOM |
+| | Scoring Framework | Build Spec |
 |---|---|---|
 | **Purpose** | Diagnostic scoring | Implementation standard |
 | **Audience** | Site owners, auditors | Developers, framework authors, CMS builders |
@@ -63,14 +59,14 @@ AXO identifies the gap. AXIOM closes it.
 
 ```
 spec/
-  AXO-Framework-v3.md          # The AXO scoring and measurement framework
-  AXIOM-Specification-v3.md     # The AXIOM implementation specification
+  AXIOM-Scoring-Framework-v3.1.md   # Measurement and diagnostic framework
+  AXIOM-Build-Spec-v3.1.md          # Implementation standard
 audits/
-  examples/                     # Example AXO audit reports
-  template.md                   # Blank template for conducting AXO audits
+  examples/                          # Example AXIOM audit reports
+  template.md                        # Blank template for conducting AXIOM audits
 ```
 
-## Quick Start: 5 Minutes to AXIOM Level 1
+## Quick Start: 5 Minutes to Level 1
 
 Create `axiom.json` at your domain root:
 
@@ -111,7 +107,7 @@ Create `axiom.json` at your domain root:
 
 Review your `robots.txt`. Verify `/sitemap.xml` exists. You are now Level 1 AXIOM-ready.
 
-See the full [AXIOM Specification](spec/AXIOM-Specification-v3.md) for Levels 2 and 3.
+See the full [AXIOM Build Spec](spec/AXIOM-Build-Spec-v3.1.md) for Levels 2 and 3.
 
 ## Related Tooling
 
@@ -119,13 +115,13 @@ See the full [AXIOM Specification](spec/AXIOM-Specification-v3.md) for Levels 2 
 
 **[Charlotte](https://github.com/TickTockBent/charlotte)** is an MCP (Model Context Protocol) server that transforms web pages into structured, agent-readable formats. It maintains a persistent headless Chromium browser instance and acts as a translation layer between visual web content and text-based AI reasoning, decomposing pages into semantic representations including accessibility trees, layout information, interactive elements, and content summaries.
 
-Charlotte was used as the primary browser automation tool during AXO audit development and is well-suited for conducting AXO audits programmatically. It enables AI agents to navigate, observe, interact with, and analyze web pages — the same capabilities needed to evaluate a site's agent-readiness across all six AXO dimensions.
+Charlotte was used as the primary browser automation tool during AXIOM audit development and is well-suited for conducting AXIOM audits programmatically. It enables AI agents to navigate, observe, interact with, and analyze web pages — the same capabilities needed to evaluate a site's agent-readiness across all six AXIOM dimensions.
 
 ## Contributing
 
-AXIOM and AXO are living specifications. Feedback, audit reports, and implementation experience are welcome.
+AXIOM is a living specification. Feedback, audit reports, and implementation experience are welcome.
 
-- Open an issue to report problems or suggest improvements to either specification.
+- Open an issue to report problems or suggest improvements to either document.
 - Submit example audit reports to the `audits/` directory.
 - If you're a framework author implementing AXIOM patterns, we'd like to hear about it.
 

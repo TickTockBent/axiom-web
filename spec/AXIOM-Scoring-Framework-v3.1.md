@@ -1,6 +1,6 @@
-# AXO Framework
+# AXIOM Scoring Framework
 
-## Agent eXecution Optimization — A Scoring & Measurement Framework for the Agentic Web
+## Measurement & Diagnostics for the Agentic Web
 
 **Author:** Wesley Shoffner, Clocktower & Associates
 **Version:** 3.0 (Draft)
@@ -10,29 +10,37 @@
 
 ## 1. The Core Question
 
-**Will your website still work when there is no screen and no human?**
+**Your site has two interfaces. You only built one of them.**
 
-When a customer asks an AI agent to "find the best running shoes for marathon training and add them to my cart," that agent visits your site, parses the DOM, evaluates your products, and attempts to complete a purchase — all without rendering a single pixel.
+Your HTML is an API you never designed. Every time an agent issues a GET request to your domain, it consumes that API — parsing your DOM for content, structure, actions, and data. Unlike a browser, it doesn't render CSS. Unlike a human, it doesn't interpret visual cues. It reads what you served and acts on what it found.
 
-If your site depends on visual layout, JavaScript rendering, or human interpretation to function, the agent sees nothing. It moves on. Your competitor gets the sale.
+Frontier AI agents — Operator, Comet, Dia — can afford to render your page in a headless browser. They have vision models, JavaScript runtimes, and million-dollar infrastructure. They're also a rounding error. The actual agentic web is the long tail: thousands of simple agents making raw HTTP requests and parsing whatever comes back. MCP tool chains. Comparison bots. Local assistants. API wrappers hitting fifty sites per query. Every new MCP server, every new API integration, every new personal assistant adds another agent to that long tail — and none of them are spinning up a browser to read your page.
 
-AXO (Agent eXecution Optimization) is a measurement framework that quantifies how effectively AI agents can discover, navigate, understand, and operate a website. It scores the gap between what humans see and what agents can actually use.
+**The web already solved this problem once.** Semantic HTML provides a baseline that works before CSS makes it beautiful and JavaScript makes it interactive. Every capable browser gets the enhanced experience. Every constrained browser still gets the content. AXIOM applies the same principle to a new audience: your site needs to work for the cheapest, simplest agent that will ever visit it, the same way it needs to work without CSS for the most constrained browser.
+
+The AXIOM Scoring Framework quantifies how effectively AI agents can discover, navigate, understand, and operate a website. It measures the gap between what humans see and what agents can actually use — across six dimensions, with quantitative scores and letter grades.
 
 ---
 
 ## 2. The Invisible Economy
 
-### 2.1 The Agent Adoption Curve
+### 2.1 The Agent Landscape
 
-Personal AI agents — autonomous software that browses, evaluates, and acts on behalf of users — are entering mainstream adoption:
+The headlines focus on frontier agents — the products with names and launch dates:
 
 - **January 2025:** OpenAI launches Operator, a browser-using agent for task execution.
-- **April 2025:** Google introduces the Agent2Agent (A2A) protocol for inter-agent communication.
-- **Mid-2025:** Agentic browsers emerge — Perplexity Comet, Browser Company Dia, Opera Neon — reframing the browser as an active participant rather than a passive renderer.
+- **Mid-2025:** Agentic browsers emerge — Perplexity Comet, Browser Company Dia, Opera Neon.
 - **July 2025:** OpenAI integrates Operator into ChatGPT as "agent mode," available to all paid users.
-- **February 2026:** OpenAI acquires OpenClaw creator to build next-generation personal agents. Altman states this will "quickly become core to our product offerings."
 
-The consensus across major AI labs is that personal agents will be a primary web interaction modality within 12–18 months.
+These agents can render your page. They have headless browsers, vision models, and the infrastructure to execute JavaScript. They'll handle your site fine.
+
+**They're also not the problem.**
+
+For every frontier agent with a headless browser, there are hundreds of lightweight agents that do a `fetch()` and parse the response. MCP tool chains that hit your page as part of a larger workflow. Comparison services that query fifty sites per request. Local assistants running on consumer hardware. Open-source agents with no budget for browser automation. Vertical-specific bots built by a developer with an API key and a weekend.
+
+This ratio gets more extreme over time, not less. Every new MCP server adds agents to the long tail. Every API wrapper, every local assistant, every task-specific bot. The diversity of agent capabilities is exploding while the floor — raw HTTP GET, parse the DOM — stays the same.
+
+**Your site needs to work for the floor.**
 
 ### 2.2 The Inverted Conversion Funnel
 
@@ -57,19 +65,19 @@ When an agent can't operate your site, it doesn't show an error page. It doesn't
 
 The user never sees your site. They never see your brand. They see a completed transaction with someone else. You lost a high-intent, ready-to-buy customer and you have no analytics event that tells you it happened.
 
-If even 5% of your purchase-intent traffic is agent-mediated today — and that number is doubling every six months — a site that agents can't operate is leaking revenue through a hole you can't see.
+The question isn't "what percentage of my traffic is agent-mediated?" The question is "how many different kinds of agents are trying to access my site, and how many of them fail silently?" The number of agent *types* is growing exponentially — every new MCP server, every new tool integration, every new personal assistant. Each one that fails on your site is a customer interaction that never happened and was never logged.
 
 ---
 
 ## 3. The Six Dimensions
 
-AXO measures agent-readiness across six dimensions. Each dimension is scored independently. The dimensions are ordered from most fundamental (can the agent see anything at all?) to most sophisticated (does the content tell a coherent story?).
+AXIOM measures agent-readiness across six dimensions. Each dimension is scored independently. The dimensions are ordered from most fundamental (can the agent see anything at all?) to most sophisticated (does the content tell a coherent story?).
 
 ### 3.1 Content Survivability (Weight: 25%)
 
 **Core question:** What percentage of the site's meaningful content remains visible and functional without JavaScript execution?
 
-**Why this is the primary differentiator:** This is the dimension that separates AXO from every other web audit discipline. Accessibility auditors test with JavaScript enabled — screen readers operate on the rendered page. SEO crawlers execute JavaScript. Performance tools measure rendered output.
+**Why this is the primary differentiator:** This is the dimension that separates AXIOM from every other web audit discipline. Accessibility auditors test with JavaScript enabled — screen readers operate on the rendered page. SEO crawlers execute JavaScript. Performance tools measure rendered output.
 
 But agents frequently don't render JavaScript at all. They issue a GET request and parse the raw HTML response. It's faster, cheaper, and more reliable than spinning up a headless browser. If your site is a client-rendered single-page application, that GET request returns an empty `<div id="app"></div>` and nothing else. Your site is invisible. Not slow. Not broken. *Invisible.*
 
@@ -256,9 +264,9 @@ Individual findings within each dimension are classified by severity:
 | Low | Minor friction or missed optimization. Address when convenient. |
 | Info | Observation with no direct impact. Context for future improvement. |
 
-### 4.2 Composite AXO Score
+### 4.2 Composite AXIOM Score
 
-The composite AXO score is a weighted average of the six dimension scores. Weights reflect the dependency chain — a site that fails on Content Survivability can't score well on anything downstream.
+The composite AXIOM score is a weighted average of the six dimension scores. Weights reflect the dependency chain — a site that fails on Content Survivability can't score well on anything downstream.
 
 | Dimension | Weight | Rationale |
 |-----------|--------|-----------|
@@ -283,9 +291,9 @@ The composite AXO score is a weighted average of the six dimension scores. Weigh
 
 ### 4.4 Score Presentation
 
-A standard AXO scorecard presents:
+A standard AXIOM scorecard presents:
 
-1. **Composite AXO score** with letter grade
+1. **Composite AXIOM score** with letter grade
 2. **Per-dimension scores** with pass/warn/fail indicators (pass ≥ 70, warn 40–69, fail < 40)
 3. **Key diagnostic metrics** displayed inline: JS dependency %, semantic HTML ratio %, static link %
 4. **Finding count by severity** (critical / high / medium / low / info)
@@ -295,9 +303,11 @@ A standard AXO scorecard presents:
 
 ## 5. What Accessibility Doesn't Cover
 
-There is real overlap between web accessibility best practices and AXO readiness. Both rely on semantic HTML and the accessibility tree. Organizations that have invested in WCAG compliance have a genuine head start on agent-readiness.
+There is real overlap between web accessibility best practices and AXIOM readiness. Both rely on semantic HTML and the accessibility tree. Organizations that have invested in WCAG compliance have a genuine head start on agent-readiness.
 
-But a head start is not the finish line.
+**A WCAG-compliant site with server-side rendering will likely score in the B or C range on AXIOM without any additional work.** That's not nothing — it means the foundation is solid. Semantic landmarks, heading hierarchy, accessible names on controls, descriptive alt text — all of this serves agents as well as it serves humans with assistive technology.
+
+But the head start plateaus. WCAG doesn't measure the things that separate a B from an A: structured data extraction, agent traffic governance, manifest-level site orientation, content survivability without JavaScript, and machine-readable action contracts. AXIOM is the last mile — the delta between "agents can partially use this site" and "agents can fully operate this site."
 
 ### 5.1 Different Consumers, Different Needs
 
@@ -313,7 +323,7 @@ Same page. Same DOM. Fundamentally different consumption models.
 
 ### 5.2 What WCAG Tests vs. What Agents Need
 
-| Capability | WCAG Catches It | AXO Catches It |
+| Capability | WCAG Catches It | AXIOM Catches It |
 |-----------|:-:|:-:|
 | Semantic HTML landmarks | ✓ | ✓ |
 | Heading hierarchy | ✓ | ✓ |
@@ -335,7 +345,7 @@ Same page. Same DOM. Fundamentally different consumption models.
 | **Visual-only state indicators** | Partially | ✓ |
 | **Data extractability (pricing, specs, inventory)** | — | ✓ |
 
-WCAG compliance covers roughly 40% of what AXO measures. The 60% it doesn't cover — Content Survivability, Data Extractability, Navigation Traversability, Agent Response Fitness, and the three-tier access model — is where agents actually fail.
+WCAG compliance covers roughly 40% of what AXIOM measures. The 60% it doesn't cover — Content Survivability, Data Extractability, Navigation Traversability, Agent Response Fitness, and the three-tier access model — is where agents actually fail.
 
 ### 5.3 The Critical Divergence: JavaScript
 
@@ -361,48 +371,39 @@ An agent needs: `product: Apex Runner V3`, `category: running shoes`, `color: bl
 
 Accessible names on controls help both consumers, but the *information density* they need is different. A screen reader user benefits from "Add Apex Runner V3 to cart — currently $149.00, in stock, free shipping over $75." An agent benefits from discrete, labeled data fields it can extract without natural language parsing.
 
-WCAG optimizes for human comprehension through assistive technology. AXO optimizes for machine comprehension without any assistive translation layer.
+WCAG optimizes for human comprehension through assistive technology. AXIOM optimizes for machine comprehension without any assistive translation layer.
 
 ---
 
-## 6. AXO and GEO — The AI Visibility Model
+## 6. What AXIOM Is Not
 
-AXO and GEO are independent axes that together define a site's complete AI visibility posture.
+AXIOM occupies a specific gap that existing standards don't address. Understanding what AXIOM *is not* prevents the most common misreadings.
 
-**AXO** answers: *Can agents execute against your site?*
-**GEO** answers: *Will AI recommend your brand?*
+| Standard | What It Solves | What It Doesn't Solve |
+|----------|---------------|----------------------|
+| **MCP** | How an LLM connects to external tools | Whether your page is readable when fetched |
+| **A2A** | How agents communicate with each other | Whether your page is navigable by an agent |
+| **AGENTS.md** | Developer-facing agent instructions in markdown | Machine-readable governance and traffic policy |
+| **GEO** | Whether AI models cite your brand in answers | Whether agents can operate and transact on your site |
+| **WCAG** | Whether humans with assistive tech can use your site | Whether machines with no human in the loop can use your site |
 
-### 6.1 The AI Visibility Matrix
+Every standard above is valuable. None of them answer the question AXIOM answers: **when an agent fetches your page, can it find the content, understand the structure, locate the actions, and extract the data?**
 
-|  | **High GEO** | **Low GEO** |
-|--|----------|---------|
-| **High AXO** | **AI-Dominant.** Agents can operate your site and AI systems recommend you. Full AI visibility. | **Mechanically Ready.** Agents can use your site but AI doesn't recommend you. Machine-readable but not machine-preferred. |
-| **Low AXO** | **Reputation Without Access.** AI recommends you but agents can't complete actions on your site. Demand is generated but conversions are lost. | **AI-Invisible.** Agents can't use your site and AI doesn't recommend you. Maximum vulnerability. |
+MCP defines how agents connect to tools — it says nothing about what happens when those tools fetch a web page. A2A defines how agents talk to each other — it says nothing about whether your site is legible to either of them. AGENTS.md provides prose guidance for developers building agents — it doesn't give agents themselves a machine-readable manifest to consume. GEO optimizes for whether AI *mentions* your brand — AXIOM optimizes for whether agents can *use* your site. WCAG ensures humans with assistive technology can access your content — AXIOM ensures machines with no human in the loop can operate it.
 
-You need GEO to get the invite. You need AXO to close the deal.
-
-### 6.2 Relationship to Existing Disciplines
-
-AXO and GEO extend existing web optimization disciplines. They do not replace them.
-
-| Existing Discipline | What It Optimizes | AXO/GEO Relationship |
-|--------------------|--------------------|---------------------|
-| **SEO** | Human search engine visibility | GEO shares foundations (structured data, content quality) but diverges in optimization targets |
-| **WCAG / Accessibility** | Human assistive technology access | AXO shares foundations (semantic HTML, accessibility tree) but extends into areas accessibility standards don't cover |
-| **Core Web Vitals** | Human-perceived performance | A site can have perfect CWV scores and still be agent-hostile (client-rendered SPA) |
-| **UX Design** | Human interaction quality | AXO measures machine interaction quality — a fundamentally different consumer with different needs |
+AXIOM is infrastructure, not marketing. It's plumbing, not reputation. It answers: can the agent see the content, understand the structure, find the buttons, and extract the data?
 
 ---
 
 ## 7. Common Failure Patterns
 
-These patterns are diagnostic — they describe what AXO measurement reveals, not how to fix it. Remediation guidance is defined in the AXIOM specification.
+These patterns are diagnostic — they describe what AXIOM measurement reveals, not how to fix it. Remediation guidance is defined in the AXIOM Build Spec.
 
 ### 7.1 The SPA Blank Page
 
 **Dimension:** Content Survivability (critical failure)
 **Pattern:** Site is a React/Vue/Angular SPA that renders entirely client-side. Initial HTML response contains only a root `<div>` and script tags.
-**AXO signal:** Text content ratio (no-JS vs. full render) < 5%.
+**AXIOM signal:** Text content ratio (no-JS vs. full render) < 5%.
 **Prevalence:** Extremely common in modern web applications.
 
 **What the agent sees:**
@@ -422,13 +423,13 @@ Agent extraction: [empty — no content, no product, no price, no actions]
 
 **Dimension:** Structural Legibility (poor to critical)
 **Pattern:** Page layout built entirely with `<div>` elements differentiated only by CSS classes. No semantic landmarks, no heading hierarchy, no structural signals in the DOM.
-**AXO signal:** Semantic-to-generic ratio < 3%. Zero landmarks detected.
+**AXIOM signal:** Semantic-to-generic ratio < 3%. Zero landmarks detected.
 
 ### 7.3 The Invisible CTA
 
 **Dimension:** Interactive Manifest Clarity (critical failure)
 **Pattern:** Primary call-to-action is a styled `<div>` or `<span>` with a JavaScript click handler. Appears as a button to humans but doesn't exist in the accessibility tree as an interactive element.
-**AXO signal:** Primary CTA absent from accessibility tree. Generic clickable element count > 0.
+**AXIOM signal:** Primary CTA absent from accessibility tree. Generic clickable element count > 0.
 
 **What the agent sees:**
 
@@ -443,31 +444,31 @@ Agent action: Cannot identify purchase action. Skipping site.
 
 **Dimension:** Data Extractability (critical failure)
 **Pattern:** Pricing tables, comparison charts, or product specifications rendered as images or infographics with no HTML text equivalent.
-**AXO signal:** Critical business data absent from DOM text content. Image-heavy sections with no alt text or non-descriptive alt text.
+**AXIOM signal:** Critical business data absent from DOM text content. Image-heavy sections with no alt text or non-descriptive alt text.
 
 ### 7.5 JavaScript-Gated Navigation
 
 **Dimension:** Navigation Traversability (poor to critical)
 **Pattern:** Primary navigation requires JavaScript to open (hamburger menus with no `<a>` fallbacks), uses infinite scroll instead of pagination, or relies on JS routing with no static URL structure.
-**AXO signal:** Static link coverage < 50%. Navigation paths require JS execution to access.
+**AXIOM signal:** Static link coverage < 50%. Navigation paths require JS execution to access.
 
 ### 7.6 The Locked Door
 
 **Dimension:** Navigation Traversability (high)
 **Pattern:** `robots.txt` blocks AI crawlers (GPTBot, ClaudeBot, PerplexityBot, Google-Extended) — often from default CMS configurations the site owner never reviewed. Note: current AI user-agent strings do not distinguish between crawlers and agents. OpenAI's Operator (a user-directed agent) uses the same `GPTBot` header as OpenAI's training crawler. Blocking `GPTBot` in `robots.txt` blocks both the crawler you don't want and the customer agent you do want.
-**AXO signal:** AI crawler access check returns blocked. Site owner unaware.
+**AXIOM signal:** AI crawler access check returns blocked. Site owner unaware.
 
 ### 7.7 Visual-Dependent Information
 
 **Dimension:** Agent Response Fitness (poor)
 **Pattern:** Important information conveyed through color alone (red = out of stock, green = available), spatial relationships (related items positioned near each other with no semantic grouping), or visual size (large text = important).
-**AXO signal:** Visual-only information indicators detected. Status/state information absent from DOM text and attributes.
+**AXIOM signal:** Visual-only information indicators detected. Status/state information absent from DOM text and attributes.
 
 ### 7.8 The Incoherent Stream
 
 **Dimension:** Agent Response Fitness (poor)
 **Pattern:** Page content, when read as linear text, is dominated by cookie banners, promotional overlays, repeated navigation chrome, and boilerplate. Actual business content is buried or fragmented.
-**AXO signal:** Boilerplate ratio > 40%. Business-purpose identification requires reading past the first 500 words.
+**AXIOM signal:** Boilerplate ratio > 40%. Business-purpose identification requires reading past the first 500 words.
 
 ---
 
@@ -548,30 +549,29 @@ Same product. Same visual presentation. Completely different agent capability.
 
 ---
 
-## 9. Conducting an AXO Audit
+## 9. Conducting an AXIOM Audit
 
 ### 9.1 Audit Scope
 
-An AXO audit can be conducted at three levels:
+An AXIOM audit can be conducted at three levels:
 
 | Level | Scope | Use Case |
 |-------|-------|----------|
 | **Page-level** | Homepage + 2–5 key pages | Initial assessment, focused remediation |
 | **Section-level** | A functional area (e-commerce catalog, blog, support docs) | Representative score for a content type |
-| **Site-level** | All major templates and content types | Definitive AXO score, full remediation roadmap |
+| **Site-level** | All major templates and content types | Definitive AXIOM score, full remediation roadmap |
 
 ### 9.2 Audit Deliverables
 
-A standard AXO audit produces:
+A standard AXIOM audit produces:
 
-1. **AXO Scorecard** — Per-dimension scores and composite score with grade.
+1. **AXIOM Scorecard** — Per-dimension scores and composite score with grade.
 2. **Findings Report** — Specific issues identified in each dimension with severity ratings.
-3. **Priority Remediation List** — Top actions ranked by impact × effort. (Detailed remediation patterns reference the AXIOM specification.)
-4. **AI Visibility Assessment** — Where the site falls on the AXO/GEO matrix with strategic implications.
+3. **Priority Remediation List** — Top actions ranked by impact × effort. (Detailed remediation patterns reference the AXIOM Build Spec.)
 
 ### 9.3 Tooling Requirements
 
-AXO measurement requires:
+AXIOM measurement requires:
 
 - A browser automation environment capable of rendering pages with and without JavaScript
 - Access to the browser's accessibility tree (e.g., via CDP `Accessibility.getFullAXTree`)
@@ -579,34 +579,35 @@ AXO measurement requires:
 - Network-level inspection for resource loading analysis
 - Multi-viewport testing capability
 
-The framework is tool-agnostic. Any implementation that can perform the measurements defined in Section 3 can produce valid AXO scores.
+The framework is tool-agnostic. Any implementation that can perform the measurements defined in Section 3 can produce valid AXIOM scores.
 
 ---
 
 ## 10. Relationship to AXIOM
 
-AXO defines *what* to measure. AXIOM defines *how to build for it*.
+The AXIOM Scoring Framework defines *what* to measure. The AXIOM Build Spec defines *how to build for it*.
 
-| | AXO | AXIOM |
+| | AXIOM Scoring Framework | AXIOM Build Spec |
 |--|-----|-------|
 | **Purpose** | Diagnostic scoring | Implementation standard |
 | **Audience** | Site owners, auditors, consultants | Developers, framework authors, CMS builders |
 | **Output** | Scores, findings, gap analysis | Manifest spec, markup patterns, compliance levels |
 | **Question** | "How agent-ready is this site?" | "How do I build an agent-ready site?" |
 
-The two are designed as a diagnostic-and-treatment pair. AXO scores identify gaps. AXIOM patterns close them.
+The two are designed as a diagnostic-and-treatment pair. AXIOM scores identify gaps. AXIOM patterns close them.
 
-See: **AXIOM Specification** (separate document)
+See: **AXIOM Build Spec** (separate document)
 
 ---
 
 ## Versioning
 
-AXO is a living framework. As AI agent capabilities evolve, the dimensions, measurement criteria, and scoring bands will be updated.
+AXIOM is a living framework. As AI agent capabilities evolve, the dimensions, measurement criteria, and scoring bands will be updated.
 
 - **v1.0 (February 2026):** Initial framework. Six dimensions, qualitative scoring.
-- **v2.0 (February 2026):** Rescoped to measurement only. Quantitative scoring bands. Remediation guidance moved to AXIOM specification. Added failure patterns 7.6–7.8. Expanded measurement criteria tables.
-- **v3.0 (February 2026):** Restructured to lead with business case. Elevated Content Survivability as primary differentiator. Added "What Accessibility Doesn't Cover" section replacing Accessibility-AXO Pipeline. Added before/after agent vision examples.
+- **v2.0 (February 2026):** Rescoped to measurement only. Quantitative scoring bands. Remediation guidance moved to AXIOM Build Spec. Added failure patterns 7.6–7.8. Expanded measurement criteria tables.
+- **v3.0 (February 2026):** Restructured to lead with business case. Elevated Content Survivability as primary differentiator. Added "What Accessibility Doesn't Cover" section replacing Accessibility-AXIOM Pipeline. Added before/after agent vision examples.
+- **v3.1 (February 2026):** Unified branding under AXIOM (dropped AXO). Reframed core argument around long-tail agents and progressive enhancement for machines. Replaced GEO matrix with "What AXIOM Is Not" differentiation section. Replaced percentage-based market sizing with capability fragmentation argument.
 - **Future versions** will incorporate findings from real-world audits, community feedback, and adaptation to new agent capabilities and protocols (MCP, A2A, and successors).
 
 Audit reports reference the framework version used.
@@ -615,8 +616,8 @@ Audit reports reference the framework version used.
 
 ## License and Attribution
 
-The AXO Framework is developed and maintained by Wesley Shoffner at Clocktower & Associates.
+The AXIOM Scoring Framework is developed and maintained by Wesley Shoffner at Clocktower & Associates.
 
-The framework is published for industry adoption. Organizations conducting AXO audits are encouraged to reference this specification and contribute feedback to its evolution.
+The framework is published for industry adoption. Organizations conducting AXIOM audits are encouraged to reference this specification and contribute feedback to its evolution.
 
 For audit services, consulting, or AXIOM implementation support: [Clocktower & Associates](https://www.clocktowerassoc.com)

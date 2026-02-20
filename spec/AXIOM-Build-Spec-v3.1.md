@@ -1,6 +1,6 @@
-# AXIOM Specification
+# AXIOM Build Spec
 
-## Agent eXecution, Information & Orchestration Markup — A Protocol for the Agentic Web
+## Implementation Standard for the Agentic Web
 
 **Author:** Wesley Shoffner, Clocktower & Associates
 **Version:** 3.0 (Draft)
@@ -17,7 +17,7 @@ Every website will face two questions in the next 18 months:
 
 AXIOM (Agent eXecution, Information & Orchestration Markup) answers both.
 
-AXIOM is an implementation standard for building websites that AI agents can effectively discover, navigate, understand, and operate. Where the AXO Framework defines **what to measure** and **how to score** agent-readiness, AXIOM defines **how to build for it**.
+AXIOM is an implementation standard for building websites that AI agents can effectively discover, navigate, understand, and operate. Where the AXIOM Scoring Framework defines **what to measure** and **how to score** agent-readiness, AXIOM defines **how to build for it**.
 
 AXIOM provides:
 
@@ -128,16 +128,44 @@ The manifest MUST be accessible at:
 https://example.com/axiom.json
 ```
 
-It MAY additionally be referenced via:
+#### Primary Discovery: Dual-Layer `<head>` Approach
 
-- A `<link>` element in the document `<head>`:
-  ```html
-  <link rel="axiom-manifest" href="/axiom.json">
-  ```
-- A `Link` HTTP header:
-  ```
-  Link: </axiom.json>; rel="axiom-manifest"
-  ```
+Current LLM-based agents process the full HTML of a page, including comments. A dual-layer approach in the document `<head>` ensures discovery by both today's agents and tomorrow's:
+
+```html
+<!-- AI agents: check /axiom.json for site navigation and operation instructions -->
+<link rel="axiom-manifest" type="application/json" href="/axiom.json">
+```
+
+**Layer 1: The HTML Comment (Works Today)**
+
+A natural language directive like `AI agents: check /axiom.json for site navigation and operation instructions` is immediately understood by any language model parsing the page. It requires no prior training, no convention recognition, no ecosystem buy-in. This works with every LLM-based agent that can read HTML, right now.
+
+**Layer 2: The `<link>` Tag (Long-Term Standard)**
+
+```html
+<link rel="axiom-manifest" type="application/json" href="/axiom.json">
+```
+
+This follows established web conventions (`<link rel="manifest">` for PWAs, `<link rel="sitemap">` for sitemaps, `<link rel="icon">` for favicons). It's the correct long-term mechanism — machine-parseable, semantic, and consistent with how the web handles discoverability. Once agent providers begin checking for `rel="axiom-manifest"` natively, this becomes the primary discovery path.
+
+**Transition Path:**
+
+| Phase | Discovery Method | Status |
+|-------|-----------------|--------|
+| **Now** | HTML comment | Primary — works with all LLM-based agents today |
+| **Adoption** | Both comment + `<link>` | Belt and suspenders during transition |
+| **Mature** | `<link>` only | Comment becomes redundant and can be removed |
+
+#### Supplementary Discovery Mechanisms
+
+These can supplement the `<head>` approach but are less reliable for current LLM-based agents:
+
+- **`robots.txt` directive** — `Axiom: /axiom.json` (mirrors the `Sitemap:` convention). Useful if agents check `robots.txt` before fetching pages.
+- **HTTP response header** — `Link: </axiom.json>; rel="axiom-manifest"`. Doesn't require touching HTML, but agents must inspect headers.
+- **`.well-known` path** — `/.well-known/axiom.json`. Follows IETF convention but requires the convention to be registered.
+
+The `<head>` dual-layer approach is recommended as the primary mechanism because it places the directive inside content that agents are already reading.
 
 ### 3.3 Manifest Structure
 
@@ -153,7 +181,11 @@ The full manifest below shows every available field. **Most are optional.** A Le
     "name": "Acme Corp",
     "description": "Enterprise widget manufacturing and distribution.",
     "primary_language": "en",
-    "contact": "https://www.acme.com/contact"
+    "contact": "https://www.acme.com/contact",
+    "sameAs": [
+      "https://www.linkedin.com/company/acme-corp",
+      "https://github.com/acme-corp"
+    ]
   },
 
   // Required. What agents can do on this site.
@@ -255,6 +287,7 @@ The full manifest below shows every available field. **Most are optional.** A Le
   "technical": {
     "rendering": "ssr",
     "spa_framework": null,
+    "content_survivability": "full",
     "api_available": false,
     "api_documentation": null
   },
@@ -279,6 +312,7 @@ The full manifest below shows every available field. **Most are optional.** A Le
 | `description` | string | Yes | One-sentence description of what this site/business does |
 | `primary_language` | string | Yes | ISO 639-1 language code |
 | `contact` | string | No | URL to contact page or email |
+| `sameAs` | array | No | URIs identifying this entity on other platforms (LinkedIn, GitHub, Crunchbase, etc.) for entity reconciliation |
 
 #### `capabilities.actions` (Required, array)
 
@@ -331,6 +365,7 @@ Hierarchical site structure for agent orientation.
 |-------|------|----------|-------------|
 | `rendering` | enum | No | `ssr`, `csr`, `ssg`, or `hybrid` |
 | `spa_framework` | string | No | Frontend framework if applicable |
+| `content_survivability` | enum | No | `full` (all content in initial HTML), `partial` (some content requires JS), or `none` (empty shell without JS) |
 | `api_available` | boolean | No | Whether a public API exists |
 | `api_documentation` | string | No | URL to API docs |
 
@@ -363,7 +398,7 @@ Agents should not need to guess. AXIOM prefers explicit declaration over implici
 
 ### 4.4 Minimal Surface Area
 
-AXIOM targets the smallest vocabulary that addresses real gaps. It does not duplicate what semantic HTML, ARIA, and schema.org already solve. Every AXIOM pattern justifies its existence by addressing a capability gap identified by the AXO Framework.
+AXIOM targets the smallest vocabulary that addresses real gaps. It does not duplicate what semantic HTML, ARIA, and schema.org already solve. Every AXIOM pattern justifies its existence by addressing a capability gap identified by the AXIOM Scoring Framework.
 
 ---
 
@@ -513,7 +548,7 @@ Applied to elements that exist in the DOM but should be treated differently by a
 
 ## 6. Remediation Patterns
 
-Each pattern maps to an AXO dimension and addresses a specific failure mode. Patterns are ordered from highest to lowest impact within each dimension.
+Each pattern maps to an AXIOM dimension and addresses a specific failure mode. Patterns are ordered from highest to lowest impact within each dimension.
 
 ### 6.1 Content Survivability Patterns
 
@@ -694,7 +729,7 @@ AXIOM defines three readiness levels, providing a progressive adoption path. Eac
 | Review `robots.txt` — ensure AI crawlers are not unintentionally blocked | Edit one line |
 | Verify XML sitemap exists at `/sitemap.xml` | Check one file |
 
-**Expected AXO score improvement:** +5–15 points on Navigation Traversability. Primary value is agent orientation and traffic governance rather than score improvement.
+**Expected AXIOM score improvement:** +5–15 points on Navigation Traversability. Primary value is agent orientation and traffic governance rather than score improvement.
 
 ### Level 2: Structural Readiness (HTML Hygiene — What You Should Already Be Doing)
 
@@ -702,7 +737,7 @@ AXIOM defines three readiness levels, providing a progressive adoption path. Eac
 
 **Why it matters:** Agents can now identify your page structure, find your interactive elements, and extract structured data. The site goes from "parseable with heuristics" to "machine-readable by design."
 
-| Requirement | AXO Dimension |
+| Requirement | AXIOM Dimension |
 |------------|---------------|
 | All Level 1 requirements | — |
 | Semantic HTML landmarks on every page (`<header>`, `<nav>`, `<main>`, `<footer>`) | Structural Legibility |
@@ -720,7 +755,7 @@ AXIOM defines three readiness levels, providing a progressive adoption path. Eac
 | Breadcrumb navigation on subpages | Navigation Traversability |
 | Cookie/promo overlays dismissable or marked `aria-hidden` | Agent Response Fitness |
 
-**Expected AXO score at Level 2: 70–89 (Grade B)**
+**Expected AXIOM score at Level 2: 70–89 (Grade B)**
 
 ### Level 3: Agent-Optimized (Full AXIOM — Competitive Advantage)
 
@@ -728,7 +763,7 @@ AXIOM defines three readiness levels, providing a progressive adoption path. Eac
 
 **Why it matters:** Agents don't just understand your site — they can operate it with confidence. They know what happens when they click a button, what data they can extract, what state an element is in, and what content to skip. This is the difference between "an agent can probably figure out your site" and "an agent can reliably transact on your site."
 
-| Requirement | AXO Dimension |
+| Requirement | AXIOM Dimension |
 |------------|---------------|
 | All Level 2 requirements | — |
 | `data-axiom-page-type` and `data-axiom-page-purpose` on all pages | Agent Response Fitness |
@@ -742,7 +777,7 @@ AXIOM defines three readiness levels, providing a progressive adoption path. Eac
 | Comprehensive schema.org coverage (all applicable content types) | Data Extractability |
 | Semantic-to-generic element ratio > 15% | Structural Legibility |
 
-**Expected AXO score at Level 3: 90–100 (Grade A)**
+**Expected AXIOM score at Level 3: 90–100 (Grade A)**
 
 ---
 
@@ -797,7 +832,7 @@ You are now Level 1 AXIOM-ready.
 
 **Audit your templates.** Most sites are generated from a small number of templates. Fix the template, fix every page that uses it.
 
-**Schema.org is the highest-ROI investment.** It improves both AXO (Data Extractability) and GEO (AI citation) simultaneously.
+**Schema.org is the highest-ROI investment.** It improves AXIOM Data Extractability scores and makes your content more useful to any system that consumes structured data — search engines, AI models, and agents alike.
 
 **Don't remove JavaScript — augment the baseline.** AXIOM doesn't require abandoning client-side rendering. It requires ensuring critical content is available without it. SSR/SSG/hybrid approaches let you keep your architecture while meeting Content Survivability requirements.
 
@@ -828,22 +863,25 @@ You are now Level 1 AXIOM-ready.
 | **schema.org** | Structured data vocabulary | AXIOM requires schema.org for data extractability and adds `data-axiom-data-*` for inline data annotation |
 | **robots.txt** | Crawler access control | AXIOM respects robots.txt for Tier 1 (crawler) traffic and provides agent policy for granular Tier 2/3 (agent) access control |
 | **sitemap.xml** | Content discovery | AXIOM requires sitemaps and adds `navigation.sections` in `axiom.json` for hierarchical site structure |
-| **llms.txt** | LLM content guidance | `axiom.json` provides structured, machine-parseable capabilities and navigation where `llms.txt` provides prose guidance. They are complementary. |
+| **MCP** | LLM ↔ tool integration | MCP defines how agents connect to tools. AXIOM defines what agents find when those tools fetch a web page. Complementary. |
+| **A2A** | Agent ↔ agent communication | A2A governs how agents talk to each other. AXIOM governs how agents interact with websites. Different layers. |
+| **AGENTS.md** | Developer-facing agent instructions | `axiom.json` provides structured, machine-parseable capabilities and governance where AGENTS.md provides prose guidance. Complementary. |
+| **llms.txt** | LLM content guidance | `axiom.json` provides structured, machine-parseable capabilities and navigation where `llms.txt` provides prose guidance. Complementary. |
 | **WCAG 2.1** | Human accessibility | AXIOM shares the same foundation (semantic HTML, accessibility tree) but measures and optimizes for machine consumers with different needs |
 
 ---
 
-## 10. Relationship to AXO
+## 10. Relationship to AXIOM Scoring Framework
 
-| | AXO | AXIOM |
+| | AXIOM Scoring Framework | AXIOM Build Spec |
 |--|-----|-------|
-| **Document** | AXO Framework | AXIOM Specification |
+| **Document** | AXIOM Scoring Framework | AXIOM Build Spec |
 | **Purpose** | Scoring & measurement | Implementation standard |
 | **Audience** | Site owners, auditors | Developers, framework authors, CMS builders |
 | **Output** | Scores, findings, gap analysis | Manifest spec, markup patterns, readiness levels |
 | **Question** | "How agent-ready is this site?" | "How do I build an agent-ready site?" |
 
-AXO identifies the gap. AXIOM closes it. Together they form the diagnostic-and-treatment framework for the agentic web.
+The Scoring Framework identifies the gap. The Build Spec closes it. Together they form the diagnostic-and-treatment framework for the agentic web.
 
 ---
 
@@ -857,8 +895,8 @@ The `axiom_version` field in `axiom.json` declares which specification version t
 
 ## License and Attribution
 
-The AXIOM Specification is developed and maintained by Wesley Shoffner at Clocktower & Associates.
+The AXIOM Build Spec is developed and maintained by Wesley Shoffner at Clocktower & Associates.
 
 The specification is published for industry adoption. Framework authors, CMS platforms, and development teams are encouraged to implement AXIOM patterns and contribute feedback.
 
-For audit services (AXO), implementation consulting (AXIOM), or tooling: [Clocktower & Associates](https://www.clocktowerassoc.com)
+For audit services, implementation consulting, or tooling: [Clocktower & Associates](https://www.clocktowerassoc.com)
