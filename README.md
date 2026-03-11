@@ -9,7 +9,7 @@
 | Spec | Full Name | Scope | Deliverable |
 |------|-----------|-------|-------------|
 | **ASM** | Agent Site Manifest | Site-level | `site` block in `agents.json` |
-| **ACP** | Agent Context Protocol | Service-level | `services` block in `agents.json` |
+| **[ACP](https://github.com/Clocktower-and-Associates/ACP)** | Agent Context Protocol | Service-level | `services` block in `agents.json` |
 | **LEAN** | Layered Efficiency for Agentic Navigation | Design philosophy | Guides authoring of both |
 
 **One-liner:** Add `/.well-known/agents.json` to your site. That's it. Agents can now understand your property and use your services.
@@ -69,7 +69,7 @@ ACP defines how services advertise their capabilities to agents. Instead of requ
 
 ACP content lives in the `services` block of `agents.json`.
 
-*ACP specification: coming soon.*
+See the full [ACP specification](https://github.com/Clocktower-and-Associates/ACP).
 
 ## Consolidated Delivery: `/.well-known/agents.json`
 
