@@ -1,9 +1,9 @@
-# AXIOM Audit Report: www.clocktowerassoc.com
+# ASM Audit Report: www.clocktowerassoc.com
 
-**Framework:** AXIOM (Agent eXecution, Information & Orchestration Markup) v3.0
+**Framework:** ASM (Agent Site Manifest) Scoring Framework v1.0
 **Date:** February 19, 2026
 **Auditor:** Clocktower & Associates (self-audit)
-**Pages Audited:** /, /services, /axiom, /axiom/scoring-framework, /about, /contact
+**Pages Audited:** /, /services, /asm, /asm/scoring-framework, /about, /contact
 
 ---
 
@@ -11,12 +11,12 @@
 
 | | |
 |---|---|
-| **AXIOM Score** | **72 / 100** |
+| **ASM Score** | **72 / 100** |
 | **Grade** | **C — Agent-Impaired** |
 | **Findings** | 2 Critical, 2 High, 8 Medium, 9 Low, 2 Info |
 
 ```
-AXIOM = (CS × 0.25) + (SL × 0.20) + (IMC × 0.20) + (DE × 0.15) + (NT × 0.10) + (ARF × 0.10)
+ASM = (CS × 0.25) + (SL × 0.20) + (IMC × 0.20) + (DE × 0.15) + (NT × 0.10) + (ARF × 0.10)
     = (92 × 0.25) + (72 × 0.20) + (78 × 0.20) + (30 × 0.15) + (68 × 0.10) + (76 × 0.10)
     = 23.0 + 14.4 + 15.6 + 4.5 + 6.8 + 7.6
     = 71.9 → 72
@@ -111,17 +111,17 @@ export const DarkModeProvider = ({ children }) => {
 | Page | Before (empty shell) | After (pre-rendered) |
 |---|---|---|
 | Homepage | 2.2 KB | **22.7 KB** |
-| AXIOM Landing | 18.2 KB* | **59.5 KB** |
+| ASM Landing | 18.2 KB* | **59.5 KB** |
 | Services | 2.2 KB | **22.1 KB** |
 
-*The AXIOM page had `getStaticProps` data serialized in `__NEXT_DATA__`, inflating the response size despite the empty DOM.
+*The ASM page had `getStaticProps` data serialized in `__NEXT_DATA__`, inflating the response size despite the empty DOM.
 
 ### Score Impact
 
-Without this fix, Content Survivability would have scored **0/100** — the textbook "SPA Blank Page" failure pattern described in Section 7.1 of the AXIOM Scoring Framework specification.
+Without this fix, Content Survivability would have scored **0/100** — the textbook "SPA Blank Page" failure pattern described in Section 7.1 of the ASM Scoring Framework specification.
 
 ```
-Pre-fix AXIOM  = (0 × 0.25) + (72 × 0.20) + (78 × 0.20) + (30 × 0.15) + (68 × 0.10) + (76 × 0.10)
+Pre-fix ASM  = (0 × 0.25) + (72 × 0.20) + (78 × 0.20) + (30 × 0.15) + (68 × 0.10) + (76 × 0.10)
              = 0 + 14.4 + 15.6 + 4.5 + 6.8 + 7.6
              = 48.9 → 49
 ```
@@ -156,8 +156,8 @@ All six pages serve fully pre-rendered HTML in the raw `curl` response. The `<di
 |---|---|---|---|
 | / | 241 | Yes (1,820 chars) | Auto-static export |
 | /services | 398 | Yes (2,799 chars) | Auto-static export |
-| /axiom | 2,631 | Yes (18,253 chars) | SSG (getStaticProps) |
-| /axiom/scoring-framework | 4,621 | Yes (33,987 chars) | SSG (getStaticProps) |
+| /asm | 2,631 | Yes (18,253 chars) | SSG (getStaticProps) |
+| /asm/scoring-framework | 4,621 | Yes (33,987 chars) | SSG (getStaticProps) |
 | /about | 423 | Yes (3,163 chars) | Auto-static export |
 | /contact | 142 | Yes (966 chars) | Auto-static export |
 
@@ -169,8 +169,8 @@ All primary navigation links use real `<a href>` tags with valid paths. Per-page
 |---|---|---|---|
 | / | 23 | 20 | 3 |
 | /services | 22 | 19 | 3 |
-| /axiom | 27 | 24 | 3 |
-| /axiom/scoring-framework | 23 | 20 | 3 |
+| /asm | 27 | 24 | 3 |
+| /asm/scoring-framework | 23 | 20 | 3 |
 | /about | 21 | 18 | 3 |
 | /contact | 21 | 18 | 3 |
 
@@ -194,7 +194,7 @@ All primary navigation links use real `<a href>` tags with valid paths. Per-page
 
 ### Landmark Coverage
 
-| Element | / | /services | /axiom | /about | /contact |
+| Element | / | /services | /asm | /about | /contact |
 |---|---|---|---|---|---|
 | `<header>` | 1 | 1 | 1 | 1 | 1 |
 | `<nav>` | 1 | 1 | 1 | 1 | 1 |
@@ -210,13 +210,13 @@ All primary navigation links use real `<a href>` tags with valid paths. Per-page
 |---|---|---|---|
 | / | 6 | 64 | 8.6% |
 | /services | 7 | 56 | 11.1% |
-| /axiom | 9 | 71 | 11.3% |
+| /asm | 9 | 71 | 11.3% |
 | /about | 9 | 62 | 12.7% |
 | /contact | 5 | 45 | 10.0% |
 
 ### Heading Hierarchy
 
-Clean sequential hierarchy on all pages except /axiom. Representative examples:
+Clean sequential hierarchy on all pages except /asm. Representative examples:
 
 **/ (Homepage)** — Clean
 ```
@@ -230,7 +230,7 @@ h1: Building the Future Through Innovation
   h2: Developer Tools [footer]
 ```
 
-**/axiom** — Dual h1 (issue)
+**/asm** — Dual h1 (issue)
 ```
 h1: The Agentic Web Is Here. Is Your Site Ready?    ← page heading
   h2: Two Frameworks. One Problem.
@@ -249,13 +249,13 @@ h1: The Agentic Web: Why Your Website Is...          ← embedded markdown h1
 |---|---|---|
 | SL-1 | Semantic-to-generic ratio 8.6–12.7% across all pages — heavily div-driven markup | Medium |
 | SL-2 | Zero `aria-label` or `aria-labelledby` on any landmark element (multiple `<section>` tags are unlabeled and indistinguishable) | Medium |
-| SL-3 | Two `<h1>` elements on /axiom — embedded business case markdown introduces a second document heading | Medium |
+| SL-3 | Two `<h1>` elements on /asm — embedded business case markdown introduces a second document heading | Medium |
 | SL-4 | Footer `<h2>` headings ("Company", "Developer Tools") pollute the heading outline on every page | Low |
 | SL-5 | No `<article>` or `<aside>` elements used anywhere | Low |
 
 ### Score Justification
 
-All primary landmarks present. Heading hierarchy clean except /axiom. `lang="en"` set on all pages. Semantic ratio falls in the 8–15% band (scoring tier 2). Deductions for missing landmark labels (important when a page has 5+ `<section>` elements with no way for an agent to distinguish them) and the dual h1 structural ambiguity.
+All primary landmarks present. Heading hierarchy clean except /asm. `lang="en"` set on all pages. Semantic ratio falls in the 8–15% band (scoring tier 2). Deductions for missing landmark labels (important when a page has 5+ `<section>` elements with no way for an agent to distinguish them) and the dual h1 structural ambiguity.
 
 ---
 
@@ -265,7 +265,7 @@ All primary landmarks present. Heading hierarchy clean except /axiom. `lang="en"
 
 ### Native Interactive Elements
 
-| Element | / | /services | /axiom | /about | /contact |
+| Element | / | /services | /asm | /about | /contact |
 |---|---|---|---|---|---|
 | `<button>` | 4 | 3 | 3 | 3 | 4 |
 | `<a href>` | 23 | 22 | 27 | 21 | 21 |
@@ -288,9 +288,9 @@ All primary landmarks present. Heading hierarchy clean except /axiom. `lang="en"
 |---|---|---|
 | IMC-1 | 3 `<a href="#">` placeholder links on every page (social media icons in footer — Twitter, LinkedIn, GitHub — all point nowhere) | Medium |
 | IMC-2 | Zero ARIA state attributes site-wide — mobile menu toggle has no `aria-expanded`, dark mode button has no `aria-pressed` | Medium |
-| IMC-3 | 2 `onclick` attributes on /axiom page | Low |
+| IMC-3 | 2 `onclick` attributes on /asm page | Low |
 | IMC-4 | Dark mode toggle SVGs missing `aria-hidden="true"` (2 per page) | Low |
-| IMC-5 | Decorative arrow SVGs in links missing `aria-hidden="true"` on /services and /axiom | Low |
+| IMC-5 | Decorative arrow SVGs in links missing `aria-hidden="true"` on /services and /asm | Low |
 
 ### Score Justification
 
@@ -319,12 +319,12 @@ Strong native element usage — all CTAs use `<button>` or `<a>`, all forms use 
 |---|---|---|---|---|
 | / | 0 | 0 | 3 | 0 |
 | /services | 0 | 0 | 2 | 0 |
-| /axiom | 0 | 2 | 6 | 2 |
-| /axiom/scoring-framework | 20 | 0 | 6 | 2 |
+| /asm | 0 | 2 | 6 | 2 |
+| /asm/scoring-framework | 20 | 0 | 6 | 2 |
 | /about | 0 | 0 | 2 | 0 |
 | /contact | 0 | 0 | 2 | 0 |
 
-### Table Accessibility (/axiom/scoring-framework only)
+### Table Accessibility (/asm/scoring-framework only)
 
 - 20 tables with `<thead>` and `<th>` elements
 - **0 `<caption>` elements** — no table has a programmatic title
@@ -337,12 +337,12 @@ Strong native element usage — all CTAs use `<button>` or `<a>`, all forms use 
 | DE-1 | Zero JSON-LD structured data on any page — no Organization, WebSite, WebPage, Service, or BreadcrumbList schema | Critical |
 | DE-2 | Zero microdata markup on any page — agents cannot programmatically extract typed business data | Critical |
 | DE-3 | Zero `<time datetime>` elements — dates are not machine-readable | Medium |
-| DE-4 | Tables on /axiom/scoring-framework lack `<caption>` and `scope` attributes | Medium |
-| DE-5 | `<dl>`/`<dt>`/`<dd>` used only on /axiom (2 definition lists) — unused elsewhere for attribute data | Low |
+| DE-4 | Tables on /asm/scoring-framework lack `<caption>` and `scope` attributes | Medium |
+| DE-5 | `<dl>`/`<dt>`/`<dd>` used only on /asm (2 definition lists) — unused elsewhere for attribute data | Low |
 
 ### Score Justification
 
-No structured data markup of any kind. An agent can read the text content but cannot programmatically extract Organization identity, service offerings, contact information, or page hierarchy as typed data. The content is human-readable but not machine-parseable beyond raw text extraction. Tables exist on the framework page but lack full metadata. The `<dl>` usage on /axiom is a positive signal but isolated.
+No structured data markup of any kind. An agent can read the text content but cannot programmatically extract Organization identity, service offerings, contact information, or page hierarchy as typed data. The content is human-readable but not machine-parseable beyond raw text extraction. Tables exist on the framework page but lack full metadata. The `<dl>` usage on /asm is a positive signal but isolated.
 
 ---
 
@@ -357,9 +357,9 @@ No structured data markup of any kind. An agent can read the text content but ca
 **Last modified:** 2025-06-15 (all pages — 8 months stale)
 
 **Missing from sitemap:**
-- /axiom
-- /axiom/scoring-framework
-- /axiom/build-spec
+- /asm
+- /asm/scoring-framework
+- /asm/build-spec
 - /showcase
 - /showcase/johnny
 - /showcase/repram
@@ -378,8 +378,8 @@ No structured data markup of any kind. An agent can read the text content but ca
 
 | Page | Breadcrumb Nav | BreadcrumbList JSON-LD |
 |---|---|---|
-| /axiom/scoring-framework | Yes (`<nav aria-label="Breadcrumb">`) | No |
-| /axiom/build-spec | Yes (`<nav aria-label="Breadcrumb">`) | No |
+| /asm/scoring-framework | Yes (`<nav aria-label="Breadcrumb">`) | No |
+| /asm/build-spec | Yes (`<nav aria-label="Breadcrumb">`) | No |
 | All other pages | No | No |
 
 ### Findings
@@ -388,7 +388,7 @@ No structured data markup of any kind. An agent can read the text content but ca
 |---|---|---|
 | NT-1 | Sitemap is 8 months stale — all lastmod dates are 2025-06-15 | High |
 | NT-2 | Sitemap contains 28 phantom/unreachable URLs from an old site structure | High |
-| NT-3 | Sitemap missing 7 live pages (/axiom, /axiom/scoring-framework, /axiom/build-spec, /showcase/*) | High |
+| NT-3 | Sitemap missing 7 live pages (/asm, /asm/scoring-framework, /asm/build-spec, /showcase/*) | High |
 | NT-4 | Breadcrumbs only on 2 spec pages; no BreadcrumbList JSON-LD anywhere | Medium |
 | NT-5 | 3 placeholder `href="#"` social links on every page | Medium |
 | NT-6 | 1 "Learn More" generic link text on homepage | Low |
@@ -408,7 +408,7 @@ The site's link structure is good — shallow depth, all navigation uses static 
 ### Plain Text Stream (Homepage, First 300 Characters)
 
 ```
-Clocktower and Associates Clocktower Home Services AXIOM Tools
+Clocktower and Associates Clocktower Home Services ASM Tools
 About Contact Us Open main menu Building the Future Through Innovation
 Clocktower and Associates delivers enterprise-grade technology solutions,
 custom software development, and strategic consulting to help your
@@ -425,7 +425,7 @@ Header (16 words) + Footer (49 words) = **65 words of boilerplate** repeated on 
 |---|---|---|---|
 | / | 241 | 176 | 27.0% |
 | /services | 398 | 333 | 16.3% |
-| /axiom | 2,631 | 2,566 | 2.5% |
+| /asm | 2,631 | 2,566 | 2.5% |
 | /about | 423 | 358 | 15.4% |
 | /contact | 142 | 77 | **45.8%** |
 
@@ -444,7 +444,7 @@ All images have alt text. No empty or missing `alt` attributes.
 | # | Finding | Severity |
 |---|---|---|
 | ARF-1 | /contact boilerplate ratio 45.8% — nearly half the page is navigation and footer chrome | Medium |
-| ARF-2 | Two `<h1>` elements on /axiom create ambiguity in page topic identification | Medium |
+| ARF-2 | Two `<h1>` elements on /asm create ambiguity in page topic identification | Medium |
 | ARF-3 | Homepage boilerplate ratio 27% — thin content page with proportionally heavy chrome | Low |
 | ARF-4 | "Open main menu" hamburger label leaks into the text stream on every page | Low |
 | ARF-5 | Footer logo alt text is keyword-stuffed and repeated on every page | Low |
@@ -455,7 +455,7 @@ All images have alt text. No empty or missing `alt` attributes.
 
 ### Score Justification
 
-Text streams are mostly coherent and read well in linear order. Headings are descriptive and accurately summarize their sections. Content ordering is good — business-critical information appears early. Main deductions for the /contact page being nearly half boilerplate (an agent reading that page gets more chrome than content) and the dual-h1 ambiguity on /axiom.
+Text streams are mostly coherent and read well in linear order. Headings are descriptive and accurately summarize their sections. Content ordering is good — business-critical information appears early. Main deductions for the /contact page being nearly half boilerplate (an agent reading that page gets more chrome than content) and the dual-h1 ambiguity on /asm.
 
 ---
 
@@ -471,7 +471,7 @@ This audit was conducted during the same session that discovered and fixed two c
 | `DarkModeProvider` returning `null` during SSR | Agents that reach the site get an empty HTML shell |
 
 ```
-Pre-fix AXIOM = (0 × 0.25) + (72 × 0.20) + (78 × 0.20) + (30 × 0.15) + (68 × 0.10) + (76 × 0.10)
+Pre-fix ASM = (0 × 0.25) + (72 × 0.20) + (78 × 0.20) + (30 × 0.15) + (68 × 0.10) + (76 × 0.10)
             = 48.9 → 49
 
 Grade: D — Agent-Hostile
@@ -482,7 +482,7 @@ Content Survivability: **0/100.** Every page returned `<div id="__next"></div>` 
 ### After Fixes
 
 ```
-Post-fix AXIOM = (92 × 0.25) + (72 × 0.20) + (78 × 0.20) + (30 × 0.15) + (68 × 0.10) + (76 × 0.10)
+Post-fix ASM = (92 × 0.25) + (72 × 0.20) + (78 × 0.20) + (30 × 0.15) + (68 × 0.10) + (76 × 0.10)
              = 71.9 → 72
 
 Grade: C — Agent-Impaired
@@ -503,11 +503,11 @@ The gap between C and B (75+) is primarily Data Extractability. Adding JSON-LD s
 | 1 | **Add JSON-LD structured data** — Organization schema site-wide, WebPage per page, Service on /services, BreadcrumbList where breadcrumb UI exists | Data Extractability | +25–35 points on DE; ~+4–5 composite |
 | 2 | **Rebuild sitemap.xml** — Add missing pages, remove phantom URLs, update lastmod dates, automate generation | Navigation Traversability | +15–20 points on NT; ~+2 composite |
 | 3 | **Add ARIA landmark labels and state attributes** — `aria-label` on `<section>` elements, `aria-expanded` on mobile menu, `aria-pressed` on dark mode toggle | Structural Legibility, Interactive Manifest Clarity | +5–8 points across SL/IMC; ~+2 composite |
-| 4 | **Fix the /axiom dual h1** — Downgrade embedded business case h1 to h2 or suppress heading level in the rendering wrapper | Structural Legibility, Agent Response Fitness | +3–5 points across SL/ARF; ~+1 composite |
+| 4 | **Fix the /asm dual h1** — Downgrade embedded business case h1 to h2 or suppress heading level in the rendering wrapper | Structural Legibility, Agent Response Fitness | +3–5 points across SL/ARF; ~+1 composite |
 | 5 | **Replace or remove placeholder social links** — Either connect to real profiles or remove the dead `href="#"` links from the footer | Interactive Manifest Clarity, Navigation Traversability | +2–3 points across IMC/NT; ~+1 composite |
 
 **Projected score after top 2 actions: ~79 — Grade B (Agent-Functional)**
 
 ---
 
-*This report was generated using the AXIOM Scoring Framework v3.0 scoring methodology. The site audited is our own — because if you're going to sell agent-readiness audits, you should be able to pass one.*
+*This report was generated using the ASM Scoring Framework v1.0 scoring methodology. The site audited is our own — because if you're going to sell agent-readiness audits, you should be able to pass one.*
